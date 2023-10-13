@@ -33,3 +33,20 @@ fetch('chat_stats.json')
     .catch(error => {
         console.error('Error:', error);
     });
+    const lastUpdatedElement = document.getElementById('last-updated');
+    const jsonDataUrl = 'chat_stats.json';
+    
+    fetch(jsonDataUrl)
+        .then(response => response.json())
+        .then(data => {
+            const lastModified = new Date(data.lastModified);
+            const now = new Date();
+            const timeDifference = now - lastModified;
+            const secondsDifference = Math.floor(timeDifference / 1000);
+    
+            lastUpdatedElement.textContent = `Last Updated: ${secondsDifference} seconds ago`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    
